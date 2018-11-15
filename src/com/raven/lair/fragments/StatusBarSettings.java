@@ -40,6 +40,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
 
     private ListPreference mNetTrafficLocation;
+    private ListPreference mNetTrafficType;
     private CustomSeekBarPreference mThreshold;
     private SystemSettingSwitchPreference mShowArrows;
 
@@ -51,6 +52,13 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
         PreferenceScreen prefSet = getPreferenceScreen();
 	final ContentResolver resolver = getActivity().getContentResolver();
+
+        int type = Settings.System.getIntForUser(resolver,
+                Settings.System.NETWORK_TRAFFIC_TYPE, 0, UserHandle.USER_CURRENT);
+        mNetTrafficType = (ListPreference) findPreference("network_traffic_type");
+        mNetTrafficType.setValue(String.valueOf(type));
+        mNetTrafficType.setSummary(mNetTrafficType.getEntry());
+        mNetTrafficType.setOnPreferenceChangeListener(this);
 
         mNetTrafficLocation = (ListPreference) findPreference("network_traffic_location");
         int location = Settings.System.getIntForUser(resolver,
@@ -102,6 +110,14 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
                     Settings.System.NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD, val,
                     UserHandle.USER_CURRENT);
             return true;
+        } else if (preference == mNetTrafficType) {
+            int val = Integer.valueOf((String) objValue);
+            Settings.System.putIntForUser(getContentResolver(),
+                    Settings.System.NETWORK_TRAFFIC_TYPE, val,
+                    UserHandle.USER_CURRENT);
+            int index = mNetTrafficType.findIndexOfValue((String) objValue);
+            mNetTrafficType.setSummary(mNetTrafficType.getEntries()[index]);
+            return true;
         }
         return false;
     }
@@ -111,11 +127,13 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
             case 0:
                 mThreshold.setEnabled(false);
                 mShowArrows.setEnabled(false);
+                mNetTrafficType.setEnabled(false);
                 break;
             case 1:
             case 2:
                 mThreshold.setEnabled(true);
                 mShowArrows.setEnabled(true);
+                mNetTrafficType.setEnabled(true);
                 break;
             default:
                 break;
