@@ -21,7 +21,7 @@
 
 <PreferenceCategory
     android:key="network_traffic"
-    android:title="@string/network_traffic_state_title" >
+    android:title="@string/network_traffic" >
 
     <ListPreference
         android:key="network_traffic_location"
