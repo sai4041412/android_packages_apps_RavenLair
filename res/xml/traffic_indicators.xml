@@ -19,10 +19,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-<PreferenceCategory
-    android:key="network_traffic"
-    android:title="@string/network_traffic" >
-
     <ListPreference
         android:key="network_traffic_location"
         android:title="@string/network_traffic_location"
