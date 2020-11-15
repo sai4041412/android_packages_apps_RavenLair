@@ -18,4 +18,9 @@
             xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
             android:title="@string/battery_options_title" >
 
+    <Preference android:key="battery_mode" 
+         android:title="@string/battery_mode_title" 
+         android:summary="@string/battery_mode_summary"
+         android:fragment="com.octavi.lab.fragments.BatteryMode" />
+
 </PreferenceScreen>
