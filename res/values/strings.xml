@@ -153,5 +153,8 @@
     <string name="lockscreen_media_art_title">Media Art</string>
     <string name="lockscreen_media_art_summary">Toggle visibility of media art</string>
 
+    <!-- Quick Settings -->
+    <string name="lockscreen_qs_disabled_title">Disable quick settings when locked</string>
+    <string name="lockscreen_qs_disabled_summary">Disable expanding quick settings on secure lock screens</string>
 </resources>
 
